@@ -3,8 +3,9 @@ package pl.sda.crm.entity;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import pl.sda.crm.util.WithEntityManagerTest;
 
-class CustomerTest extends BaseEntityTest {
+class CustomerTest extends WithEntityManagerTest {
 
     @Test
     void shouldSaveCustomerToDatabase() {

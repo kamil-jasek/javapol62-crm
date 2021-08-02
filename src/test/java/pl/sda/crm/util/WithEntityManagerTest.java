@@ -1,4 +1,4 @@
-package pl.sda.crm.entity;
+package pl.sda.crm.util;
 
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-abstract class BaseEntityTest {
+public abstract class WithEntityManagerTest {
 
     @Autowired
     protected EntityManager em;

@@ -20,6 +20,7 @@ import lombok.EqualsAndHashCode;
 import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pl.sda.crm.dto.RegisterCustomerForm;
 
 @Entity
 @Table(name = "customers")
@@ -52,6 +53,16 @@ public final class Customer {
         this.type = type;
         this.addresses = new ArrayList<>();
         this.premiumStatus = new PremiumStatus();
+    }
+
+    public static Customer createWith(RegisterCustomerForm form) {
+        final var customer = new Customer(form.getName(), CustomerType.valueOf(form.getType().name()));
+        final var address = form.getAddress();
+        customer.addAddress(new Address(address.getStreet(),
+            address.getCity(),
+            address.getZipCode(),
+            address.getCountry()));
+        return customer;
     }
 
     public List<Address> getAddresses() {
