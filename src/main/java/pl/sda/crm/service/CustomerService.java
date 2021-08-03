@@ -20,12 +20,11 @@ public class CustomerService {
     @Transactional
     public RegisteredCustomerId registerCustomer(RegisterCustomerForm form) {
         if (repository.isCustomerNameRegistered(form.getName())) {
-            throw new CustomerNameRegisteredException("customer name: " + form.getName());
+            throw new CustomerNameRegisteredException("customer name already registered: " + form.getName());
         }
 
         final var customer = Customer.createWith(form);
         repository.save(customer);
         return new RegisteredCustomerId(customer.getId());
     }
-
 }
