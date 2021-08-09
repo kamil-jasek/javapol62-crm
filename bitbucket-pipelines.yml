@@ -28,6 +28,15 @@ pipelines:
   branches:
     develop:
       - step:
+          name: Build and Test
+          caches:
+            - maven
+          script:
+            - mvn -B test --file pom.xml
+          after-script:
+            # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
+            - pipe: atlassian/checkstyle-report:0.2.0
+      - step:
           name: Deploy to DEV
           deployment: dev
           script:
