@@ -8,13 +8,6 @@
 image: maven:3.6.3
 
 pipelines:
-  branches:
-    develop:
-      - step:
-          name: Deploy to DEV
-          deployment: dev
-          script:
-            - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git HEAD:master
   default:
     - parallel:
       - step:
@@ -32,3 +25,10 @@ pipelines:
             # Run a security scan for sensitive data.
             # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
             - pipe: atlassian/git-secrets-scan:0.4.3
+  branches:
+    develop:
+      - step:
+          name: Deploy to DEV
+          deployment: dev
+          script:
+            - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git HEAD:master
